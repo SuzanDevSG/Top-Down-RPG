@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c090d18753a5c864fac3e81d038fb2e4, type: 3}
+  m_Name: Wave1
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 0}
+  enemyWaveSpawn:
+  - chaserCount: 5
+    bomberCount: 0
+    creeperCount: 2
+  - chaserCount: 5
+    bomberCount: 2
+    creeperCount: 2
+  - chaserCount: 10
+    bomberCount: 5
+    creeperCount: 5
+  - chaserCount: 10
+    bomberCount: 10
+    creeperCount: 10
