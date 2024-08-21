@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
     {
         GetInput();
         CheckPlayerState();
+        MovePlayer();
     }
     private void FixedUpdate()
     {
-        MovePlayer();
         //RotatePlayer();
         
     }
@@ -67,21 +67,23 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        rb.MovePosition(transform.position +  playerControl * ( Time.fixedDeltaTime * speed));
+        transform.position += playerControl * (Time.fixedDeltaTime * speed);
+        //rb.MovePosition(transform.position +  playerControl * ( Time.fixedDeltaTime * speed));
     }
-    private void RotatePlayer()
-    {
-        if (playerControl.sqrMagnitude <= 0f)
-        {
-            return;
-        }
+    //private void RotatePlayer()
+    //{
+    //    if (playerControl.sqrMagnitude <= 0f)
+    //    {
+    //        return;
+    //    }
 
-        // input taken to rotate
-        var direction = Mathf.Atan2(playerControl.x, playerControl.z) * Mathf.Rad2Deg;
-        // Amount of Angle to rotate
-        var angle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.y, direction, ref currentVelocity, lookSpeed);
-        // rotate player using the angle
-        rb.rotation = Quaternion.Euler(0, angle, 0);
-        // Debug.Log(playerControl.magnitude);
-    }
+    //    // input taken to rotate
+    //    var direction = Mathf.Atan2(playerControl.x, playerControl.z) * Mathf.Rad2Deg;
+    //    // Amount of Angle to rotate
+    //    var angle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.y, direction, ref currentVelocity, lookSpeed);
+    //    // rotate player using the angle
+    //    //rb.rotation = Quaternion.Euler(0, angle, 0);
+    //    transform.rotation = Quaternion.Euler(0, angle, 0);
+    //    // Debug.Log(playerControl.magnitude);
+    //}
 }

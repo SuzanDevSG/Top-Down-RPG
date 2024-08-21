@@ -1,17 +1,12 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    public Animator controller;
     private PlayerController playerController;
+    public Animator controller;
 
     private float currentSpeed;
     private Vector3 initialPos;
-
-    private float MoveX, MoveZ;
 
     private void Start()
     {
