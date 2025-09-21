@@ -12,12 +12,17 @@ using UnityEngine.Events;
 /// Audio and Particles
 /// HitInfo and DealDamage
 /// </summary>
+
+/// <summary>
+/// set target range
+/// find target within range
+/// shoot target
+/// </summary>
+
+
 public class WeaponHandler : MonoBehaviour
 {
-    public PlayerController playerController;
     public WeaponProfile weaponProfile;
-
-
 
     public Transform shootingPos;
     public Transform pointOfGun;
@@ -79,12 +84,6 @@ public class WeaponHandler : MonoBehaviour
             return;
 
 
-        if(playerController.ControlLegacy && playerController.playerControl != Vector3.zero) 
-        {
-                return;
-        }
-
-
         // Check Timer is equal to zero and reset timer value to firerate 
         if (timer == 0)
         {
@@ -102,16 +101,11 @@ public class WeaponHandler : MonoBehaviour
     {
         bulletCount--;
 
-        //Debug.Log("Gun Shot");
-
-
         float spreadX = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile.recoil);
         float spreadY = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile .recoil);
         Vector3 spread = new(spreadX, spreadY, 0);
 
         directionWithSpread = shootingPos.forward + spread ;
-        
-        // Debug.Log(spread);
 
         OnFire.Invoke();
         if (!Physics.Raycast(shootingPos.position, directionWithSpread, out hit, weaponProfile.maxRange, layerMask))
@@ -125,9 +119,6 @@ public class WeaponHandler : MonoBehaviour
         {
             statHandler.DealDamage(weaponProfile.maxDamage);
         }
-
-
-
 
     }
     /*private void OnDrawGizmos()

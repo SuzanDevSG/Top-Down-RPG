@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 0
   playerName: Max
   maxHealth: 1000
-  maxSpeed: 5
+  maxSpeed: 3
   maxLookSpeed: 0.3

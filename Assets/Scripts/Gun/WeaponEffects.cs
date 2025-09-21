@@ -8,7 +8,6 @@ public class WeaponEffects : MonoBehaviour
     public AudioClip clip;
 
     public GameObject  bullet, muzzleFlash, stoneHitEffect, bloodHitEffect;
-    private float forwardForce = 50f;
 
     private void Start()
     {
@@ -37,6 +36,8 @@ public class WeaponEffects : MonoBehaviour
         
         GameObject firedBullet = Instantiate(bullet, weaponHandler.pointOfGun.transform.position, weaponHandler.shootingPos.transform.rotation);
         firedBullet.transform.forward = weaponHandler.directionWithSpread.normalized;
+
+        float forwardForce = 50f;
         firedBullet.transform.GetComponent<Rigidbody>().AddForce(firedBullet.transform.forward * forwardForce, ForceMode.Impulse);
         Destroy(firedBullet, 2f);
     }

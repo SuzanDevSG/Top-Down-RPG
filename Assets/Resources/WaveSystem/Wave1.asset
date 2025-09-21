@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   spawn: {fileID: 0}
-  enemyWaveSpawn:
+  enemySpawnCount:
   - chaserCount: 5
-    bomberCount: 0
-    creeperCount: 2
-  - chaserCount: 5
+    bomberCount: 1
+    creeperCount: 0
+  - chaserCount: 10
     bomberCount: 2
-    creeperCount: 2
-  - chaserCount: 10
+    creeperCount: 0
+  - chaserCount: 15
     bomberCount: 5
-    creeperCount: 5
-  - chaserCount: 10
+    creeperCount: 1
+  - chaserCount: 20
     bomberCount: 10
+    creeperCount: 2
+  - chaserCount: 0
+    bomberCount: 2
     creeperCount: 10

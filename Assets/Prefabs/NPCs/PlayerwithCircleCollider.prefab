@@ -1072,11 +1072,11 @@ GameObject:
   - component: {fileID: 2688525700136474989}
   - component: {fileID: 4392608276001231821}
   - component: {fileID: 7032128534661439754}
+  - component: {fileID: 5432518080368493497}
   - component: {fileID: 7667846343729463268}
   - component: {fileID: 9121797550995088930}
   - component: {fileID: 3680936706911269751}
   - component: {fileID: 9214538020654125674}
-  - component: {fileID: 5432518080368493497}
   m_Layer: 7
   m_Name: PlayerwithCircleCollider
   m_TagString: Player
@@ -1171,6 +1171,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1.4904115, z: 0.5}
   m_Center: {x: 0, y: 1.1819288, z: 0}
+--- !u!135 &5432518080368493497
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043122618610895575}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.23, z: 0}
 --- !u!114 &7667846343729463268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,7 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afca7793a421d5409755bd905453141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProfileController: {fileID: 11400000, guid: 4021015d736006f41af4c7b3eddc0b75, type: 2}
+  playerProfile: {fileID: 11400000, guid: 4021015d736006f41af4c7b3eddc0b75, type: 2}
   weapon: {fileID: 8191667335543799387}
   playerControl: {x: 0, y: 0, z: 0}
   walk: 0
@@ -1232,27 +1253,6 @@ MonoBehaviour:
   playerProfileStatsHandler: {fileID: 11400000, guid: 4021015d736006f41af4c7b3eddc0b75, type: 2}
   isDead: 0
   currentHealth: 0
---- !u!135 &5432518080368493497
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4043122618610895575}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.3
-  m_Center: {x: 0, y: 0.23, z: 0}
 --- !u!1 &4291426004879642170
 GameObject:
   m_ObjectHideFlags: 0

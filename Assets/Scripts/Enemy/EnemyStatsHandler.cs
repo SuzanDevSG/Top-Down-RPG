@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyStatsHandler : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class EnemyStatsHandler : MonoBehaviour
 
     public void Start()
     {
+        AIController = GetComponent<AIController>();
         currentHealth = aiProfile.maxHealth;
         Debug.Log(gameObject.name + " : " +  aiProfile.maxHealth);
     }
@@ -23,7 +23,8 @@ public class EnemyStatsHandler : MonoBehaviour
         {
             AIController.onDie?.Invoke();
             death = true;
-            //AIController.agent.isStopped = true;
+            AIController.agent.isStopped = true;
+            AIController.agent.speed = 0;
             Destroy(gameObject,1f);
         }
 

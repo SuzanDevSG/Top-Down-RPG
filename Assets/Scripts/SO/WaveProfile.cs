@@ -2,14 +2,13 @@ using Cinemachine.Utility;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 
 [CreateAssetMenu(menuName = "Wave/WaveProfile")]
 public class WaveProfile : ScriptableObject
 {
     public Spawnner spawn;
-    public List<EnemyWaveSpawn> enemyWaveSpawn;
+    public List<EnemySpawnCount> enemySpawnCount;
 }
 
 /// <summary>
@@ -17,7 +16,7 @@ public class WaveProfile : ScriptableObject
 /// </summary>
 
 [Serializable]
-public class EnemyWaveSpawn
+public class EnemySpawnCount
 {
 
     public int chaserCount;

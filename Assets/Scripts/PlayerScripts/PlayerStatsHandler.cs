@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public class PlayerStatsHandler : MonoBehaviour
@@ -13,11 +11,13 @@ public class PlayerStatsHandler : MonoBehaviour
     private Coroutine playerDeath;
     private void Start()
     {
+        if(playerProfileStatsHandler == null)
+        {
+            playerProfileStatsHandler = Resources.Load<PlayerProfile>("Player/DefaultPlayerProfile");
+        }
         playerAnimation = GetComponent<PlayerAnimation>();
         currentHealth = playerProfileStatsHandler.maxHealth;
     }
-
-
     public void DealDamage(float damage)
     {
         currentHealth  -= damage;
@@ -32,17 +32,15 @@ public class PlayerStatsHandler : MonoBehaviour
     private IEnumerator Die()
     {
         playerAnimation.controller.Play("PlayerDeath");
+
+        // disable player Control
+        PlayerController playerController = gameObject.GetComponent<PlayerController>();
+        playerController.enabled = false;
+
         isDead = true;
         yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);
-        StopDie();
-
-    }
-
-    private void StopDie()
-    {
         StopCoroutine(playerDeath);
-
+        playerController.enabled = true;
     }
-
 }

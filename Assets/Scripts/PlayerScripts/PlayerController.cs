@@ -1,89 +1,78 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerProfile playerProfileController;
-
+    public PlayerProfile playerProfile;
     private Rigidbody rb;
-    private float walkSpeed;
+    private PlayerInputSystem playerInputSystem;
+
+
     private float speed;
     private float lookSpeed;
-    private float lookWalkSpeed;
     private float currentVelocity = 1;
 
     [Header("Accessed By Other Scripts")]
-    public GameObject weapon;
     public Vector3 playerControl;
-    public bool walk;
-    public bool weaponState;
-    public bool ControlLegacy;
 
     void Start()
     {
-        if(playerProfileController == null)
-        {
-            playerProfileController = Resources.Load<PlayerProfile>("Player/DefaultPlayerProfile");
-        }  
+        Application.targetFrameRate = 90;
         rb = GetComponent<Rigidbody>();
-        walkSpeed = playerProfileController.maxSpeed / 2;
-        lookWalkSpeed = playerProfileController.maxLookSpeed * 1.5f;
+        if (playerProfile == null)
+        {
+            playerProfile = Resources.Load<PlayerProfile>("Player/DefaultPlayerProfile");
+        }
 
-        weaponState = weapon.activeSelf;
+        speed = playerProfile.maxSpeed;
+        lookSpeed = playerProfile.maxLookSpeed;
+
+        playerInputSystem = new PlayerInputSystem();
+        playerInputSystem.Player.Enable();
     }
 
-    void Update()
+    private void Update()
     {
         GetInput();
-        CheckPlayerState();
-        MovePlayer();
     }
+
     private void FixedUpdate()
     {
+        MovePlayer();
         //RotatePlayer();
-        
     }
-    public void GetInput() 
+
+    public void GetInput()
     {
-        walk = Input.GetKey(KeyCode.LeftShift);
-        playerControl = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        Vector2 control = playerInputSystem.Player.Movement.ReadValue<Vector2>();
+        playerControl = new Vector3(control.x, 0f, control.y);
 
-        if(playerControl.magnitude > 1f)
-        {
-            playerControl.Normalize();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            weapon.SetActive(!weaponState);
-        }
-    }
-    private void CheckPlayerState()
-    {
-        weaponState = weapon.activeSelf;
-
-        speed = walk ? walkSpeed : playerProfileController.maxSpeed;
-        lookSpeed = walk ? lookWalkSpeed : playerProfileController.maxLookSpeed;
+        //if (playerControl.sqrMagnitude > 1f)
+        //{
+        //    playerControl.Normalize();
+        //}
     }
 
     private void MovePlayer()
     {
-        transform.position += playerControl * (Time.fixedDeltaTime * speed);
-        //rb.MovePosition(transform.position +  playerControl * ( Time.fixedDeltaTime * speed));
+        Vector3 newPosition = rb.position + playerControl * (Time.fixedDeltaTime * speed);
+        rb.MovePosition(newPosition);
     }
-    //private void RotatePlayer()
-    //{
-    //    if (playerControl.sqrMagnitude <= 0f)
-    //    {
-    //        return;
-    //    }
 
-    //    // input taken to rotate
-    //    var direction = Mathf.Atan2(playerControl.x, playerControl.z) * Mathf.Rad2Deg;
-    //    // Amount of Angle to rotate
-    //    var angle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.y, direction, ref currentVelocity, lookSpeed);
-    //    // rotate player using the angle
-    //    //rb.rotation = Quaternion.Euler(0, angle, 0);
-    //    transform.rotation = Quaternion.Euler(0, angle, 0);
-    //    // Debug.Log(playerControl.magnitude);
-    //}
+    private void RotatePlayer()
+    {
+        if (playerControl.sqrMagnitude <= 0f)
+        {
+            return;
+        }
+
+        // input taken to rotate
+        var direction = Mathf.Atan2(playerControl.x, playerControl.z) * Mathf.Rad2Deg;
+        // Amount of Angle to rotate
+        var angle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.y, direction, ref currentVelocity, lookSpeed);
+        // rotate player using the angle
+        rb.rotation = Quaternion.Euler(0, angle, 0);
+        //transform.rotation = Quaternion.Euler(0, angle, 0);
+        // Debug.Log(playerControl.magnitude);
+    }
 }

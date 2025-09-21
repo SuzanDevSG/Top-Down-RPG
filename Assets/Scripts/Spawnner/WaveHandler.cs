@@ -42,7 +42,7 @@ public class WaveHandler : MonoBehaviour
             currentWaveProfileIndex++;
 
             // is next wave available ?
-            if(currentWaveProfileIndex >= waveProfile.enemyWaveSpawn.Count)
+            if(currentWaveProfileIndex >= waveProfile.enemySpawnCount.Count)
             {
                 onLevelComplete?.Invoke(currentWaveProfileIndex);
                 return;
@@ -55,9 +55,9 @@ public class WaveHandler : MonoBehaviour
     private void WaveGenerator()
     {
         Debug.Log("wave Generated");
-        ChaserSpwanSO.RaiseSpawn(waveProfile.enemyWaveSpawn[currentWaveProfileIndex].chaserCount);
-        BomberSpwanSO.RaiseSpawn(waveProfile.enemyWaveSpawn[currentWaveProfileIndex].bomberCount);
-        CreeperSpwanSO.RaiseSpawn(waveProfile.enemyWaveSpawn[currentWaveProfileIndex].creeperCount);
+        ChaserSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].chaserCount);
+        BomberSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].bomberCount);
+        CreeperSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].creeperCount);
 
     }
 
