@@ -23,6 +23,7 @@ using UnityEngine.Events;
 public class WeaponHandler : MonoBehaviour
 {
     public WeaponProfile weaponProfile;
+    public PlayerRotation playerRotation;
 
     public Transform shootingPos;
     public Transform pointOfGun;
@@ -39,15 +40,21 @@ public class WeaponHandler : MonoBehaviour
 
     void Start()
     {
-        weaponProfile = Resources.Load<WeaponProfile>("Weapon/AKMProfile");
+        if(weaponProfile == null)
+        {
+            weaponProfile = Resources.Load<WeaponProfile>("Weapon/AKMProfile");
+        }
 
         bulletCount = weaponProfile.maxAmmo;
+        if (playerRotation != null)
+        {
+            playerRotation.OnEnemyInRange.AddListener(() => CheckShootReady(Shoot));
+        }
     }
-
-    void Update()
+    private void OnDestroy()
     {
-        GetInput();
-        CheckShootReady(Shoot);
+        if (playerRotation != null)
+            playerRotation.OnEnemyInRange.RemoveListener(() => CheckShootReady(Shoot));
     }
 
     private void Reload()
@@ -68,7 +75,7 @@ public class WeaponHandler : MonoBehaviour
         // Reload to get ammo
         reload = Input.GetKeyDown(KeyCode.R);
 
-        if(reload)  Reload();
+        if (reload) Reload();
     }
 
     private void CheckShootReady(Action callBack)
@@ -78,19 +85,17 @@ public class WeaponHandler : MonoBehaviour
 
         if (timer > 0)
             timer -= Time.deltaTime;
-        if (!fire)
-            return;
         if (bulletCount <= 0)
             return;
 
 
         // Check Timer is equal to zero and reset timer value to firerate 
-        if (timer == 0)
+        if (timer <= 0)
         {
             timer = 1f / weaponProfile.maxFireRate;
             for (int i = 0; i < weaponProfile.bulletPerShot; i++)
             {
-            callBack?.Invoke();
+                callBack?.Invoke();
             }
 
         }
@@ -102,15 +107,15 @@ public class WeaponHandler : MonoBehaviour
         bulletCount--;
 
         float spreadX = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile.recoil);
-        float spreadY = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile .recoil);
+        float spreadY = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile.recoil);
         Vector3 spread = new(spreadX, spreadY, 0);
 
-        directionWithSpread = shootingPos.forward + spread ;
+        directionWithSpread = shootingPos.forward + spread;
 
         OnFire.Invoke();
         if (!Physics.Raycast(shootingPos.position, directionWithSpread, out hit, weaponProfile.maxRange, layerMask))
         {
-            Debug.Log("Couldnot hit object");;
+            Debug.Log("Couldnot hit object"); ;
             return;
         }
         HitEffect.Invoke(hit);

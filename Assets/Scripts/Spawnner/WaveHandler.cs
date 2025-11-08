@@ -32,8 +32,6 @@ public class WaveHandler : MonoBehaviour
         WaveTime--;
         //Debug.Log(Mathf.RoundToInt(WaveTime));
         
-        
-
         // check if Wave is Completed
         if(EnemyParent.childCount <= 0 || WaveTime == 0)
         {

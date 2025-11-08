@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
 
 
     private float speed;
-    private float lookSpeed;
-    private float currentVelocity = 1;
+    
 
     [Header("Accessed By Other Scripts")]
     public Vector3 playerControl;
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour
         }
 
         speed = playerProfile.maxSpeed;
-        lookSpeed = playerProfile.maxLookSpeed;
 
         playerInputSystem = new PlayerInputSystem();
         playerInputSystem.Player.Enable();
@@ -39,7 +37,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        //RotatePlayer();
+        
+        
     }
 
     public void GetInput()
@@ -59,20 +58,5 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(newPosition);
     }
 
-    private void RotatePlayer()
-    {
-        if (playerControl.sqrMagnitude <= 0f)
-        {
-            return;
-        }
 
-        // input taken to rotate
-        var direction = Mathf.Atan2(playerControl.x, playerControl.z) * Mathf.Rad2Deg;
-        // Amount of Angle to rotate
-        var angle = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.y, direction, ref currentVelocity, lookSpeed);
-        // rotate player using the angle
-        rb.rotation = Quaternion.Euler(0, angle, 0);
-        //transform.rotation = Quaternion.Euler(0, angle, 0);
-        // Debug.Log(playerControl.magnitude);
-    }
 }

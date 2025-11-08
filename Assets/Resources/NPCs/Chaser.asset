@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   maxHealth: 20
-  attackDamage: 50
-  attackRange: 3
-  timeToCalculatePath: 1.5
-  timeToAttack: 1
+  attackDamage: 20
+  attackRange: 2
+  timeToCalculatePath: 2
+  timeToAttack: 1.5
   rangeToStop: {x: 1.5, y: 2}
   attackMask:
     serializedVersion: 2
