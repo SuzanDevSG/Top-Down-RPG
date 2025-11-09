@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe1d858f12810f4b8306fc5dda27bae, type: 3}
   m_Name: ShotGunProfile
   m_EditorClassIdentifier: 
-  maxAmmo: 25
-  maxFireRate: 2
-  maxDamage: 15
-  maxRange: 5
-  bulletPerShot: 5
-  recoil: 1
+  defaultMaxAmmo: 6
+  defaultFireRate: 2
+  defaultPower: 20
+  defaultDamage: 10
+  defaultRange: 10
+  defaultBulletPerShot: 3
+  defaultRecoil: 10
+  defaultReloadTime: 1

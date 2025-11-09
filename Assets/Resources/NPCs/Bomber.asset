@@ -17,8 +17,8 @@ MonoBehaviour:
   attackDamage: 0
   attackRange: 7
   timeToCalculatePath: 2
-  timeToAttack: 1
-  rangeToStop: {x: 5, y: 7}
+  timeToAttack: 2
+  rangeToStop: {x: 4, y: 5}
   attackMask:
     serializedVersion: 2
     m_Bits: 384

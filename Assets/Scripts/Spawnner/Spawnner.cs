@@ -1,10 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections.Generic;
 using Random = UnityEngine.Random;
-/// <summary>
-/// provides random spawn points within a level area
-/// </summary>
 public class Spawnner : MonoBehaviour
 {
     public EnemySpawnEvent EnemySpwanSO;
@@ -22,7 +18,22 @@ public class Spawnner : MonoBehaviour
     {
         var spawnPoint = transform.position + Random.insideUnitSphere * radius;
         spawnPoint.y = 0;
-        Debug.Log(spawnPoint);
+        return spawnPoint;
+    }
+
+    public Vector3 GetDonutSpawnPoint()
+    {
+        /// <summary>
+        /// Get a random point in a donut shape (torus) around the spawner.
+        /// </summary>
+        /// <returns>A random point in the donut shape.</returns>
+
+        Vector3 spawnPoint = transform.position + Random.insideUnitSphere * radius;
+        spawnPoint.y = 0;
+
+        float donutRadius = radius * 0.5f;
+        spawnPoint += Random.insideUnitSphere * donutRadius;
+
         return spawnPoint;
     }
     public void SpawnEnemies(int count)
@@ -40,6 +51,7 @@ public class Spawnner : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
+
 /*public static Vector3 GetSpawnPoint(Vector2 minMax, int spawnAreaRadius) //x=>10 -10,10
 {
 

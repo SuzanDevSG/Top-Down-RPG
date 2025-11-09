@@ -1,131 +1,154 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-
 /// <summary>
-/// Input
 /// Bullet count
 /// Rate of fire
-/// Shoot
-/// Audio and Particles
-/// HitInfo and DealDamage
-/// </summary>
-
-/// <summary>
-/// set target range
 /// find target within range
+/// Rotate Player towards target
 /// shoot target
 /// </summary>
-
 
 public class WeaponHandler : MonoBehaviour
 {
     public WeaponProfile weaponProfile;
+    public PlayerRotation playerRotation;
 
     public Transform shootingPos;
     public Transform pointOfGun;
     public RaycastHit hit;
     public LayerMask layerMask;
 
+    public static UnityAction<Transform> OnEnemyTargeted;
     public UnityEvent OnFire;
-    public UnityEvent<RaycastHit> HitEffect;
 
-    public static bool fire;
     private bool reload;
-    [SerializeField] private float bulletCount, timer;
+    private Coroutine reloadCoroutine;
+    [SerializeField] private float bulletCount, weaponFireRateTimer;
     public Vector3 directionWithSpread;
 
-    void Start()
+    private void Start()
     {
-        weaponProfile = Resources.Load<WeaponProfile>("Weapon/AKMProfile");
+        if (weaponProfile == null)
+        {
+            weaponProfile = Resources.Load<WeaponProfile>("Weapon/AKMProfile");
+        }
 
-        bulletCount = weaponProfile.maxAmmo;
+        bulletCount = weaponProfile.defaultMaxAmmo;
+
     }
-
-    void Update()
+    private void Update()
     {
-        GetInput();
-        CheckShootReady(Shoot);
+        bool fireRateReady = CheckFireRateTimer();
+        bool bulletReady = CheckBulletReady();
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, weaponProfile.defaultRange, layerMask);
+
+        if (hitColliders.Length <= 0)
+        {
+            if (bulletCount != weaponProfile.defaultMaxAmmo && !reload)
+            {
+                reloadCoroutine = StartCoroutine(Reload());
+            }
+            return;
+        }
+
+        Transform nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+        foreach (var hitCollider in hitColliders)
+        {
+            float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestEnemy = hitCollider.transform;
+            }
+        }
+
+        if (nearestEnemy == null)
+        {
+            return;
+        }
+        if (bulletReady && nearestEnemy != null)
+        {
+            if (reload)
+                CancelReload();
+        }
+
+        if (fireRateReady && bulletReady)
+        {
+            OnEnemyTargeted?.Invoke(nearestEnemy);
+
+            // shoot at the enemy in range
+            StartCoroutine(Shoot());
+        }
+
     }
-
-    private void Reload()
+    private bool CheckBulletReady()
     {
-        Invoke(nameof(ResetReload), 1.5f);
+        if (bulletCount <= 0)
+        {
+            if (!reload)
+                reloadCoroutine = StartCoroutine(Reload());
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    private bool CheckFireRateTimer()
+    {
+        // Clamp Timer value between 0 and firerate
+        weaponFireRateTimer = Mathf.Clamp(weaponFireRateTimer, 0f, weaponProfile.defaultFireRate);
+        if (weaponFireRateTimer > 0)
+            weaponFireRateTimer -= Time.deltaTime;
+
+        // Check Timer is equal to zero and reset timer value to firerate 
+        if (weaponFireRateTimer <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    private IEnumerator Shoot()
+    {
+        weaponFireRateTimer = weaponProfile.defaultFireRate;
+        yield return null;
+        bulletCount--;
+
+        float spreadX = Random.Range(-weaponProfile.defaultRecoil, weaponProfile.defaultRecoil);
+        float spreadY = Random.Range(-weaponProfile.defaultRecoil, weaponProfile.defaultRecoil);
+        Vector3 spread = new(spreadX, spreadY, 0);
+
+        directionWithSpread = pointOfGun.forward + spread;
+
+        OnFire?.Invoke();
+    }
+    private IEnumerator Reload()
+    {
+        reload = true;
+        yield return new WaitForSeconds(weaponProfile.defaultReloadTime);
+        ResetReload();
+        reloadCoroutine = null;
+    }
+    private void CancelReload()
+    {
+        StopCoroutine(reloadCoroutine);
+        reload = false;
+        reloadCoroutine = null;
+
     }
     private void ResetReload()
     {
-        bulletCount = weaponProfile.maxAmmo;
+        bulletCount = weaponProfile.defaultMaxAmmo;
+        weaponFireRateTimer = 0;
         reload = false;
     }
-
-    private void GetInput()
+    private void OnDrawGizmos()
     {
-        // Fire using Mouse left Button click
-        fire = Input.GetMouseButton(0);
-
-        // Reload to get ammo
-        reload = Input.GetKeyDown(KeyCode.R);
-
-        if(reload)  Reload();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, weaponProfile.defaultRange);
     }
-
-    private void CheckShootReady(Action callBack)
-    {
-        // limiting timer to 0 and FireRateTime
-        timer = Mathf.Clamp(timer, 0, weaponProfile.maxFireRate);
-
-        if (timer > 0)
-            timer -= Time.deltaTime;
-        if (!fire)
-            return;
-        if (bulletCount <= 0)
-            return;
-
-
-        // Check Timer is equal to zero and reset timer value to firerate 
-        if (timer == 0)
-        {
-            timer = 1f / weaponProfile.maxFireRate;
-            for (int i = 0; i < weaponProfile.bulletPerShot; i++)
-            {
-            callBack?.Invoke();
-            }
-
-        }
-    }
-
-
-    private void Shoot()
-    {
-        bulletCount--;
-
-        float spreadX = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile.recoil);
-        float spreadY = UnityEngine.Random.Range(-weaponProfile.recoil, weaponProfile .recoil);
-        Vector3 spread = new(spreadX, spreadY, 0);
-
-        directionWithSpread = shootingPos.forward + spread ;
-
-        OnFire.Invoke();
-        if (!Physics.Raycast(shootingPos.position, directionWithSpread, out hit, weaponProfile.maxRange, layerMask))
-        {
-            Debug.Log("Couldnot hit object");;
-            return;
-        }
-        HitEffect.Invoke(hit);
-
-        if (hit.transform.gameObject.TryGetComponent<EnemyStatsHandler>(out EnemyStatsHandler statHandler))
-        {
-            statHandler.DealDamage(weaponProfile.maxDamage);
-        }
-
-    }
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(shootingPos.position , shootingPos.forward * weaponStats.maxRange);
-
-        
-    }*/
 }

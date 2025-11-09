@@ -10,22 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c090d18753a5c864fac3e81d038fb2e4, type: 3}
-  m_Name: Wave1
+  m_Name: Test Profile
   m_EditorClassIdentifier: 
   spawn: {fileID: 0}
   enemySpawnCount:
-  - chaserCount: 5
+  - chaserCount: 3
     bomberCount: 0
     creeperCount: 0
-  - chaserCount: 10
+  - chaserCount: 3
     bomberCount: 0
     creeperCount: 0
-  - chaserCount: 15
+  - chaserCount: 3
     bomberCount: 0
     creeperCount: 0
-  - chaserCount: 15
+  - chaserCount: 3
     bomberCount: 0
     creeperCount: 0
-  - chaserCount: 20
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
     bomberCount: 0
     creeperCount: 0

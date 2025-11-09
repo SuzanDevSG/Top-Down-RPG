@@ -23,8 +23,9 @@ public class EnemyStatsHandler : MonoBehaviour
         {
             AIController.onDie?.Invoke();
             death = true;
-            AIController.agent.isStopped = true;
+            //AIController.agent.isStopped = true;
             AIController.agent.speed = 0;
+            AIController.GetComponent<Collider>().enabled = false;
             Destroy(gameObject,1f);
         }
 

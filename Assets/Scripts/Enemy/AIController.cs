@@ -28,13 +28,6 @@ public abstract class AIController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform; //target
         InitializeStats();
     }
-
-    private void OnDisable()
-    {
-        onDie?.RemoveAllListeners();
-    }
-
-    //[SerializeField] private Animator anim;
     private void InitializeStats()
     {
         //x=2 y=3 2,3

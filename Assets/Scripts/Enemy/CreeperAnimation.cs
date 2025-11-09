@@ -11,7 +11,7 @@
     }
     private void OnDestroy()
     {
-        controller.onDie?.RemoveAllListeners();
+        controller.onDie?.RemoveListener(DieAnimation);
 
     }
     public void DieAnimation()

@@ -7,21 +7,17 @@ public class WeaponEffects : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip clip;
 
-    public GameObject  bullet, muzzleFlash, stoneHitEffect, bloodHitEffect;
+    public GameObject bullet, muzzleFlash, stoneHitEffect, bloodHitEffect;
 
     private void Start()
     {
         weaponHandler = GetComponent<WeaponHandler>();
 
-        weaponHandler.OnFire.AddListener(PlayShootClip);
         weaponHandler.OnFire.AddListener(InstantiateParticles);
-
-        weaponHandler.HitEffect.AddListener(AfterHitEffect);
-
     }
     private void OnDestroy()
     {
-        weaponHandler.OnFire.RemoveAllListeners();
+        weaponHandler.OnFire.RemoveListener(InstantiateParticles);
     }
     void PlayShootClip()
     {
@@ -29,28 +25,29 @@ public class WeaponEffects : MonoBehaviour
     }
     void InstantiateParticles()
     {
+        PlayShootClip();
+
         Instantiate(muzzleFlash, weaponHandler.pointOfGun.position, weaponHandler.pointOfGun.rotation);
 
-        //Vector3 spread = new(Random.Range(-weaponHandler.weaponStats.recoil, weaponHandler.weaponStats.recoil),
-        //    Random.Range(-weaponHandler.weaponStats.recoil, weaponHandler.weaponStats.recoil),0);
-        
-        GameObject firedBullet = Instantiate(bullet, weaponHandler.pointOfGun.transform.position, weaponHandler.shootingPos.transform.rotation);
-        firedBullet.transform.forward = weaponHandler.directionWithSpread.normalized;
+        //bullet instantiation and force application
+        float bulletSpeed = weaponHandler.weaponProfile.defaultPower;
 
-        float forwardForce = 50f;
-        firedBullet.transform.GetComponent<Rigidbody>().AddForce(firedBullet.transform.forward * forwardForce, ForceMode.Impulse);
+        GameObject firedBullet = Instantiate(bullet, weaponHandler.pointOfGun.transform.position, weaponHandler.shootingPos.rotation);
+        var rb = firedBullet.transform.GetComponent<Rigidbody>();
+        rb.velocity = weaponHandler.shootingPos.forward * bulletSpeed;
+        firedBullet.transform.GetComponent<Bullet>().SetBulletProperties(weaponHandler.weaponProfile.defaultDamage, weaponHandler.layerMask, AfterHitEffect);
         Destroy(firedBullet, 2f);
     }
-    void AfterHitEffect(RaycastHit hit)
+    public void AfterHitEffect(Transform hitTransform)
     {
 
-        if (hit.transform.CompareTag("Enemy"))
+        if (hitTransform.transform.CompareTag("Enemy"))
         {
-            Instantiate(bloodHitEffect, hit.point, Quaternion.Euler(-hit.normal));
+            Instantiate(bloodHitEffect, hitTransform.position, Quaternion.Euler(-hitTransform.forward));
         }
-        if (hit.transform.CompareTag("Wall"))
+        if (hitTransform.transform.CompareTag("Wall"))
         {
-            Instantiate(stoneHitEffect, hit.point, Quaternion.Euler(-hit.normal));
+            Instantiate(stoneHitEffect, hitTransform.position, Quaternion.Euler(-hitTransform.forward));
         }
     }
 

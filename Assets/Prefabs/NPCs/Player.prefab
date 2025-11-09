@@ -80,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bffa2bbc07ee04a92ffbbaab9b3934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 66120672995051185}
   weaponProfile: {fileID: 11400000, guid: 560f6a5079fbebd4c8e5399bb161f04b, type: 2}
   shootingPos: {fileID: 266823608985871795}
   pointOfGun: {fileID: 5366048442323114511}
@@ -421,7 +420,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -429,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -465,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 11f413a762834174ea172eb53bd5a0c4, type: 3}
       propertyPath: m_Layer
@@ -582,12 +581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afca7793a421d5409755bd905453141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProfileController: {fileID: 11400000, guid: 4021015d736006f41af4c7b3eddc0b75, type: 2}
-  weapon: {fileID: 2943652593968959772}
+  playerProfile: {fileID: 0}
   playerControl: {x: 0, y: 0, z: 0}
-  walk: 0
-  weaponState: 0
-  ControlLegacy: 0
 --- !u!114 &1356361617633134416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,9 +595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a995f680974d7f41a46ca1c4b34101d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundMask:
+  AttackRadius: 10
+  EnemyLayer:
     serializedVersion: 2
-    m_Bits: 904
+    m_Bits: 0
 --- !u!114 &2486330389966141758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,6 +625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerProfileStatsHandler: {fileID: 11400000, guid: 4021015d736006f41af4c7b3eddc0b75, type: 2}
+  isDead: 0
   currentHealth: 0
 --- !u!4 &7308973247819894226 stripped
 Transform:

@@ -32,8 +32,6 @@ public class WaveHandler : MonoBehaviour
         WaveTime--;
         //Debug.Log(Mathf.RoundToInt(WaveTime));
         
-        
-
         // check if Wave is Completed
         if(EnemyParent.childCount <= 0 || WaveTime == 0)
         {
@@ -54,7 +52,6 @@ public class WaveHandler : MonoBehaviour
     }
     private void WaveGenerator()
     {
-        Debug.Log("wave Generated");
         ChaserSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].chaserCount);
         BomberSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].bomberCount);
         CreeperSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].creeperCount);
