@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   maxHealth: 20
-  attackDamage: 0
+  attackDamage: 1
   attackRange: 7
   timeToCalculatePath: 2
   timeToAttack: 2

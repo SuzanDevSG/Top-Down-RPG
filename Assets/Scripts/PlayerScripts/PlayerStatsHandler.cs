@@ -17,16 +17,20 @@ public class PlayerStatsHandler : MonoBehaviour
         }
         playerAnimation = GetComponent<PlayerAnimation>();
         currentHealth = playerProfileStatsHandler.maxHealth;
+        UIManager.Instance.UpdateHealthUI(currentHealth, playerProfileStatsHandler.maxHealth);
     }
     public void DealDamage(float damage)
     {
         currentHealth  -= damage;
+        UIManager.Instance.UpdateHealthUI(currentHealth, playerProfileStatsHandler.maxHealth);
+
         Debug.Log(transform.tag + " health : " + currentHealth);
         currentHealth = Mathf.Clamp(currentHealth, 0, playerProfileStatsHandler.maxHealth);
         if(currentHealth <= 0)
         {
             playerDeath = StartCoroutine(Die());
         }
+
     }
 
     private IEnumerator Die()

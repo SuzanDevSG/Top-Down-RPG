@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e61a51e6e78fa14e839a7f6a0003a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveProfile: {fileID: 11400000, guid: 5091c43300e2b074d9aac7692790947a, type: 2}
+  waveProfile: {fileID: 11400000, guid: f39daf4905b3f1341a1d848cf5665305, type: 2}
   currentWaveProfileIndex: 0
   WaveTime: 60
   onWaveComplete:

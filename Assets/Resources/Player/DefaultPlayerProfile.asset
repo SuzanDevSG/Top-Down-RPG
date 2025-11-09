@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   playerName: Max
-  maxHealth: 1000
+  maxHealth: 5
   maxSpeed: 3
   maxLookSpeed: 0.2
