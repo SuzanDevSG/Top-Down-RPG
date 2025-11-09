@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour
 
 
     private float speed;
-    
 
+
+    [HideInInspector]
     [Header("Accessed By Other Scripts")]
+    
     public Vector3 playerControl;
 
     void Start()
@@ -37,8 +39,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        
-        
     }
 
     public void GetInput()

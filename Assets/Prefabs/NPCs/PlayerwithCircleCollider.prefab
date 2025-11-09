@@ -794,8 +794,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150207185510852448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0.421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1191,7 +1191,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.3
-  m_Center: {x: 0, y: 0.23, z: 0}
+  m_Center: {x: 0, y: 0.29, z: 0}
 --- !u!114 &7667846343729463268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,13 +1218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a995f680974d7f41a46ca1c4b34101d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRadius: 10
-  EnemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  OnEnemyInRange:
-    m_PersistentCalls:
-      m_Calls: []
+  rotationType: 0
 --- !u!114 &3680936706911269751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,9 +2253,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9121797550995088930}
     - target: {fileID: 870428701188358718, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 870428701188358718, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 7667846343729463268}
+    - target: {fileID: 2157834896472620792, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00072
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157834896472620792, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157834896472620792, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00486
+      objectReference: {fileID: 0}
     - target: {fileID: 3166127928585829612, guid: ef30e43bd024cdb4898540aecf86e264, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.00111

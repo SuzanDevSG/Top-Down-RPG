@@ -52,7 +52,6 @@ public class WaveHandler : MonoBehaviour
     }
     private void WaveGenerator()
     {
-        Debug.Log("wave Generated");
         ChaserSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].chaserCount);
         BomberSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].bomberCount);
         CreeperSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].creeperCount);

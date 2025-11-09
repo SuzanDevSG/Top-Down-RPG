@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe1d858f12810f4b8306fc5dda27bae, type: 3}
   m_Name: AKMProfile
   m_EditorClassIdentifier: 
-  maxAmmo: 40
-  maxFireRate: 10
-  maxDamage: 25
-  maxRange: 50
-  bulletPerShot: 1
-  recoil: 0
+  defaultMaxAmmo: 5
+  defaultFireRate: 0.5
+  defaultPower: 20
+  defaultDamage: 5
+  defaultRange: 10
+  defaultBulletPerShot: 1
+  defaultRecoil: 2
+  defaultReloadTime: 3

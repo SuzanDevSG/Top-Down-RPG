@@ -14,15 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawn: {fileID: 0}
   enemySpawnCount:
-  - chaserCount: 1
-    bomberCount: 1
-    creeperCount: 1
-  - chaserCount: 5
-    bomberCount: 5
-    creeperCount: 5
-  - chaserCount: 1
-    bomberCount: 1
-    creeperCount: 1
-  - chaserCount: 5
-    bomberCount: 5
-    creeperCount: 5
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0
+  - chaserCount: 3
+    bomberCount: 0
+    creeperCount: 0

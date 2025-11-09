@@ -18,7 +18,6 @@ public class Spawnner : MonoBehaviour
     {
         var spawnPoint = transform.position + Random.insideUnitSphere * radius;
         spawnPoint.y = 0;
-        Debug.Log(spawnPoint);
         return spawnPoint;
     }
 
