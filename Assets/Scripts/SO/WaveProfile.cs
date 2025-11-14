@@ -1,4 +1,3 @@
-using Cinemachine.Utility;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Wave/WaveProfile")]
 public class WaveProfile : ScriptableObject
 {
-    public Spawnner spawn;
     public List<EnemySpawnCount> enemySpawnCount;
 }
 

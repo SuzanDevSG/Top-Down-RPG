@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ public class PlayerRotation : MonoBehaviour
     }
     private void Start()
     {
-        lookSpeed = playerController.playerProfile.maxLookSpeed;
+        lookSpeed = playerController.session.profile.maxLookSpeed;
 
         WeaponHandler.OnEnemyTargeted += SetNearestEnemy;
     }
@@ -32,7 +31,6 @@ public class PlayerRotation : MonoBehaviour
     {
         WeaponHandler.OnEnemyTargeted -= SetNearestEnemy;
     }
-
     private void RotatePlayer(Vector3 inputControl)
     {
         if (inputControl.sqrMagnitude <= 0f)
@@ -62,11 +60,8 @@ public class PlayerRotation : MonoBehaviour
             case RotationType.TowardsEnemy:
 
                 RotateTowardsEnemy(nearestEnemy);
-
                 break;
         }
-
-
     }
     private Transform RotateTowardsEnemy(Transform nearestEnemy)
     {
@@ -93,5 +88,4 @@ public class PlayerRotation : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         rotationType = RotationType.Normal;
     }   
-
 }

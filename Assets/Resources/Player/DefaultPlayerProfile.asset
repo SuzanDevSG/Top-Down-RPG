@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632a5cf7364d86a49ae0d253719ae84e, type: 3}
   m_Name: DefaultPlayerProfile
   m_EditorClassIdentifier: 
-  id: 0
-  playerName: Max
-  maxHealth: 5
-  maxSpeed: 3
-  maxLookSpeed: 0.2
+  profile:
+    id: 0
+    Name: Hero
+    level: 1
+    maxHealth: 5
+    maxSpeed: 3
+    interactionRadius: 3
+    maxLookSpeed: 0.3

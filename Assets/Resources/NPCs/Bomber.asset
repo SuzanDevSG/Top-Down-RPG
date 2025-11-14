@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ceda6463b91b8542b37b8f197869efa, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b45cf6b7b2d27a42b0b450437842641, type: 3}
   m_Name: Bomber
   m_EditorClassIdentifier: 
-  id: 2
-  maxHealth: 20
-  attackDamage: 1
-  attackRange: 7
-  timeToCalculatePath: 2
-  timeToAttack: 2
-  rangeToStop: {x: 4, y: 5}
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 384
+  profile:
+    id: 0
+    maxHealth: 15
+    attackDamage: 1
+    attackRange: 3
+    moveSpeed: 2
+    timeToCalculatePath: 0.5
+    timeToAttack: 4
+    rangeToStop: 3
+    attackMask:
+      serializedVersion: 2
+      m_Bits: 256

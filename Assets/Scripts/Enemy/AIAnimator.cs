@@ -1,6 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 public abstract class AIAnimator : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public abstract class AIAnimator : MonoBehaviour
     private Vector3 initialPosition;
     protected virtual void Start()
     {
-        AIController controller = GetComponent<AIController>();
+        controller = GetComponent<AIController>();
 
         initialPosition = transform.position;
         

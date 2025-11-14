@@ -3,30 +3,37 @@
 public class EnemyStatsHandler : MonoBehaviour
 {
     public AIController AIController;
-    public AIProfile aiProfile;
-    private bool death = false;
+    public AIProfileSO aiProfile;
+    private AIProfile profile;
 
     [SerializeField] private float currentHealth;
 
     public void Start()
     {
+        if (DataManager.ExistData(DataType.EnemyData))
+        {
+            profile = DataManager.LoadData<AIProfile>(DataType.EnemyData);
+        }
+        else
+        {
+            if (aiProfile == null)
+            {
+                aiProfile = Resources.Load<AIProfileSO>("Enemy/DefaultAIProfile");
+
+            }
+            else
+                profile = aiProfile.profile;
+        }
         AIController = GetComponent<AIController>();
-        currentHealth = aiProfile.maxHealth;
-        Debug.Log(gameObject.name + " : " +  aiProfile.maxHealth);
+        currentHealth = profile.maxHealth;
     }
     public void DealDamage(float damage)
     {
         currentHealth -= damage;
-        Mathf.Clamp(currentHealth, 0, aiProfile.maxHealth);
-        Debug.Log(gameObject.tag + " health : " + currentHealth);
-        if (currentHealth <= 0 && !death)
+        Mathf.Clamp(currentHealth, 0, profile.maxHealth);
+        if (currentHealth <= 0)
         {
-            AIController.onDie?.Invoke();
-            death = true;
-            //AIController.agent.isStopped = true;
-            AIController.agent.speed = 0;
-            AIController.GetComponent<Collider>().enabled = false;
-            Destroy(gameObject,1f);
+            AIController.RaiseOnDie();
         }
 
     }

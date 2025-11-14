@@ -12,20 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c090d18753a5c864fac3e81d038fb2e4, type: 3}
   m_Name: Test Profile
   m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
   enemySpawnCount:
-  - chaserCount: 3
-    bomberCount: 0
-    creeperCount: 0
-  - chaserCount: 3
-    bomberCount: 0
-    creeperCount: 0
-  - chaserCount: 3
-    bomberCount: 0
-    creeperCount: 0
-  - chaserCount: 3
-    bomberCount: 0
-    creeperCount: 0
   - chaserCount: 3
     bomberCount: 0
     creeperCount: 0

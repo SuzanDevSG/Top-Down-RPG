@@ -29,13 +29,18 @@ public class WeaponEffects : MonoBehaviour
 
         Instantiate(muzzleFlash, weaponHandler.pointOfGun.position, weaponHandler.pointOfGun.rotation);
 
-        //bullet instantiation and force application
-        float bulletSpeed = weaponHandler.weaponProfile.defaultPower;
 
+        FiringBullet();
+        
+    }
+    private void FiringBullet()
+    {
+        //bullet instantiation and force application
         GameObject firedBullet = Instantiate(bullet, weaponHandler.pointOfGun.transform.position, weaponHandler.shootingPos.rotation);
+        float bulletSpeed = weaponHandler.profile.defaultPower;
         var rb = firedBullet.transform.GetComponent<Rigidbody>();
         rb.velocity = weaponHandler.shootingPos.forward * bulletSpeed;
-        firedBullet.transform.GetComponent<Bullet>().SetBulletProperties(weaponHandler.weaponProfile.defaultDamage, weaponHandler.layerMask, AfterHitEffect);
+        firedBullet.transform.GetComponent<Bullet>().SetBulletProperties(weaponHandler.profile.defaultDamage, weaponHandler.CollisionMask, AfterHitEffect);
         Destroy(firedBullet, 2f);
     }
     public void AfterHitEffect(Transform hitTransform)

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
     [SerializeField] private UIProfile[] uIProfiles;
-    private Dictionary<int, UIProfile> _profiles;
-    [SerializeField] private UIHealthProfile healthProfile;
+    private Dictionary<int, UIProfile> _profiles = new();
 
     private void Awake()
     {
@@ -19,13 +19,8 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < uIProfiles.Length; i++)
         {
-
             _profiles.Add(uIProfiles[i].id, uIProfiles[i]);
         }
-    }
-    private void Start()
-    {
-
     }
     public void ShowProfile(int id)
     {
@@ -34,7 +29,6 @@ public class UIManager : MonoBehaviour
             _profiles[id].ShowProfile();
         }
     }
-
     public void HideProfile(int id)
     {
         if (_profiles.ContainsKey(id))
@@ -42,14 +36,41 @@ public class UIManager : MonoBehaviour
             _profiles[id].HideProfile();
         }
     }
-
-    public void UpdateHealthUI(float currentHealth, float maxHealth = 5)
+    // Exp Methods
+    public void SetExpUI(float currentExp, float maxExp, int playerLevel)
     {
+        foreach (UIProfile profile in _profiles.Values)
+        {
+            if(profile is UIExpProfile expProfile)
+                expProfile.SetExpValue(currentExp, maxExp, playerLevel);
+        }
+    }
+    public void UpdateExpUI(float currentExp)
+    {
+        //_profiles.Where(p => p.Value is UIExpProfile).ToList().ForEach(p =>
+        //{
+        //    (p.Value as UIExpProfile).UpdateExpBar(currentExp, playerLevel);
+        //});
 
-        healthProfile.UpdateHealthUI(currentHealth, maxHealth);
-
+        foreach (UIProfile profile in _profiles.Values)
+        {
+            if(profile is UIExpProfile expProfile)
+                expProfile.UpdateExpBar(currentExp);
+        }
     }
 
+    // Health Methods
+    public void UpdateHealthUI(float currentHealth, float maxHealth = 5)
+    {
+        foreach (UIProfile uIProfile in _profiles.Values)
+        {
+            if (uIProfile is UIHealthProfile healthUI)
+            {
+                healthUI.UpdateHealthUI(currentHealth, maxHealth);
+            }
+        }
+    }
 
-
+    // 
 }
+

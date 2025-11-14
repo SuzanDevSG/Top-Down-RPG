@@ -13,8 +13,20 @@ PrefabInstance:
       value: Grenade
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 18d1c85abd1a9e047a7c8d371a533184, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 18d1c85abd1a9e047a7c8d371a533184, type: 3}
       propertyPath: m_TagString
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 18d1c85abd1a9e047a7c8d371a533184, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 18d1c85abd1a9e047a7c8d371a533184, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 18d1c85abd1a9e047a7c8d371a533184, type: 3}
       propertyPath: m_LocalPosition.x

@@ -23,5 +23,3 @@ public class UIProfile : MonoBehaviour
     }
 
 }
-
-

@@ -250,21 +250,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bffa2bbc07ee04a92ffbbaab9b3934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  weaponProfile: {fileID: 11400000, guid: 560f6a5079fbebd4c8e5399bb161f04b, type: 2}
+  weaponProfile: {fileID: 11400000, guid: c3119738e86489a4ca3b1e9a4dab7377, type: 2}
+  profile:
+    id: 0
+    defaultFireRate: 0
+    level: 1
+    defaultMaxAmmo: 5
+    defaultDamage: 5
+    defaultRange: 20
+    defaultReloadTime: 2
+    defaultBulletPerShot: 1
+    defaultPower: 30
+    defaultRecoil: 0
+  playerRotation: {fileID: 0}
   shootingPos: {fileID: 0}
   pointOfGun: {fileID: 2157834896472620792}
-  layerMask:
+  EnemyMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 959
   OnFire:
     m_PersistentCalls:
       m_Calls: []
-  HitEffect:
-    m_PersistentCalls:
-      m_Calls: []
   bulletCount: 0
-  timer: 0
+  weaponFireRateTimer: 0
   directionWithSpread: {x: 0, y: 0, z: 0}
 --- !u!114 &8281451089553522181
 MonoBehaviour:

@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
             }
         }
         
-        if (!other.CompareTag("Bullet") && !other.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
         {
             AfterHitEffects?.Invoke(other.transform);
             Destroy(gameObject);

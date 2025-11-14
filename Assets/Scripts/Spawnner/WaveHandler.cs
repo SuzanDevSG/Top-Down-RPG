@@ -9,11 +9,11 @@ public class WaveHandler : MonoBehaviour
 {
     public WaveProfile waveProfile;
 
-    [SerializeField] private int currentWaveProfileIndex;
+    [SerializeField] private int currentWaveProfileIndex = 0;
     [SerializeField] private float WaveTime = 60f;
 
     public UnityEvent<int> onWaveComplete;
-    public UnityEvent<int> onLevelComplete;
+    public UnityEvent onLevelComplete;
 
     public EnemySpawnEvent ChaserSpwanSO;
     public EnemySpawnEvent BomberSpwanSO;
@@ -28,7 +28,7 @@ public class WaveHandler : MonoBehaviour
     }
     private void WaveTimer()
     {
-
+        
         WaveTime--;
         //Debug.Log(Mathf.RoundToInt(WaveTime));
         
@@ -40,14 +40,16 @@ public class WaveHandler : MonoBehaviour
             currentWaveProfileIndex++;
 
             // is next wave available ?
-            if(currentWaveProfileIndex >= waveProfile.enemySpawnCount.Count)
+            if (currentWaveProfileIndex >= waveProfile.enemySpawnCount.Count)
             {
-                onLevelComplete?.Invoke(currentWaveProfileIndex);
+                onLevelComplete?.Invoke();
+                Debug.Log("Level Completed");
                 return;
             }
+
             //initialized next wave
             WaveGenerator();
-            WaveTime += 60f * currentWaveProfileIndex;
+            WaveTime += 60f;
         }
     }
     private void WaveGenerator()
@@ -55,19 +57,7 @@ public class WaveHandler : MonoBehaviour
         ChaserSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].chaserCount);
         BomberSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].bomberCount);
         CreeperSpwanSO.RaiseSpawn(waveProfile.enemySpawnCount[currentWaveProfileIndex].creeperCount);
-
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(waveProfile.randomizer.transform.position, spwanRadius);
-    //    //Gizmos.DrawWireCube(transform.position,new Vector3(spwanMinMax.x*2,2,spwanMinMax.y*2));
-    //    for (int i = 0;i < spwanMinMax.Count; i++)
-    //    {
-    //        Gizmos.DrawWireCube(transform.position ,new Vector3( spwanMinMax[i].minMax.x*2, 2,spwanMinMax[i].minMax.y*2));
-    //    }
-    //}
 
 }
 

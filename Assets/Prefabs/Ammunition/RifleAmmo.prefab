@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6121931951974670516}
   - component: {fileID: 2825700682979377037}
   - component: {fileID: 3881907629546605988}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh2_Group3_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2251274042374059742}
   - component: {fileID: 3646391504714726431}
   - component: {fileID: 6979291611526501373}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh1_Group2_Group1_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 7969573841464519526}
   - component: {fileID: 5208186722420234262}
   - component: {fileID: 2897865579610435771}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RifleAmmo
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2251274042374059742}

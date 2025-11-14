@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3eea69589e2d54c81af80feb373ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  EnemySpwanSO: {fileID: 11400000, guid: 7f4aa9fbd2fbbcf4bb73f53268f97d9d, type: 2}
+  EnemyParent: {fileID: 0}
+  radius: 3.21
